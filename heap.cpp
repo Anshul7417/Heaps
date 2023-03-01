@@ -39,6 +39,41 @@ public:
         }
     }
 
+
+
+
+    void deletefromheap(){
+        if(size==0){
+            cout<<"Nothing to delete"<<endl;
+            return;
+        }
+
+        //put last element at first position
+        arr[1]=arr[size];
+
+
+        //remove last element
+        size--;
+
+
+        int i=1;
+        //take root node to its correct position
+        while(i<size){
+            int leftindex=2*i;
+            int rightindex=2*i+1;
+
+            if(leftindex<size && arr[i]<arr[leftindex]){
+                swap(arr[i],arr[leftindex]);
+                i=leftindex;
+            }else if(rightindex<size && arr[i]<arr[rightindex]){
+                swap(arr[i],arr[rightindex]);
+                i=rightindex;
+            }else{
+                return;
+            }
+        }
+    }
+
     void print()
     {
         for (int i = 1; i <= size; i++)
@@ -48,6 +83,45 @@ public:
         cout << endl;
     }
 };
+
+
+
+
+
+
+
+void heapify(int arr[], int n, int i){
+     
+     int largest = i;
+     int left = 2*i;
+     int right= 2*i+1;
+
+
+     if(left<n && arr[largest]<arr[left]){
+        largest=left;
+     }if(right<n && arr[largest]< arr[right]){
+        largest=right;
+     }
+
+
+     if(largest!=i){
+        swap(arr[largest],arr[i]);
+        heapify(arr,n,largest);
+     }
+}
+
+
+void heapSort(int arr[],int n){
+    int size=n;
+
+    while(size>1){
+        swap(arr[size],arr[1]);
+        size--;
+
+
+        heapify(arr,size)
+    }
+}
 
 int main()
 {
@@ -59,5 +133,14 @@ int main()
     h.insert(52);
     h.insert(54);
     h.print();
+
+    int arr[6]={-1,54,53,55,52,50};
+
+    int n=5;
+
+    for(int i=n/2; i>0; i--){
+        heapify(arr,n,i);
+    }
+
     return 0;
 }
