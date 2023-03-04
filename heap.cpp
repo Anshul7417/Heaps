@@ -97,9 +97,9 @@ void heapify(int arr[], int n, int i){
      int right= 2*i+1;
 
 
-     if(left<n && arr[largest]<arr[left]){
+     if(left<=n && arr[largest]<arr[left]){
         largest=left;
-     }if(right<n && arr[largest]< arr[right]){
+     }if(right<=n && arr[largest]< arr[right]){
         largest=right;
      }
 
@@ -119,7 +119,7 @@ void heapSort(int arr[],int n){
         size--;
 
 
-        heapify(arr,size)
+        heapify(arr,size,1);
     }
 }
 
@@ -138,9 +138,17 @@ int main()
 
     int n=5;
 
+    //heapify
     for(int i=n/2; i>0; i--){
         heapify(arr,n,i);
     }
+
+
+
+    //heapsort
+
+
+    heapSort(arr,n);
 
     return 0;
 }
